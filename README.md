@@ -1,4 +1,4 @@
-# IOC Enrichment Tool
+### IOC Enrichment Tool
 
 Script en Python que consulta un indicador de compromiso (IOC) — hash de archivo, IP, dominio o URL — contra dos fuentes de threat intelligence (VirusTotal y AlienVault OTX) y devuelve un veredicto combinado. Guarda un historial de todas las consultas realizadas en `resultados.json`.
 
