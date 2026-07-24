@@ -9,7 +9,7 @@ Cuando un analista SOC investiga un indicador sospechoso, suele tener que revisa
 ## Cómo funciona
 
 1. Detecta automáticamente el tipo de IOC que se le pasa (hash / IP / dominio / URL).
-2. Consulta VirusTotal para obtener el conteo de motores que lo marcan como malicioso.
+2. Consulta VirusTotal para ver cuántos motores antivirus lo marcan como malicioso sobre el total analizado, clasificando el resultado en **LIMPIO / SOSPECHOSO / MALICIOSO**.
 3. Consulta AlienVault OTX para ver cuántos reportes de la comunidad existen sobre ese indicador.
 4. Muestra ambos veredictos y guarda el resultado en un historial local.
 
@@ -47,15 +47,19 @@ Ejemplos:
 ```bash
 python3 ioc_check.py 8.8.8.8
 python3 ioc_check.py google.com
-python3 ioc_check.py 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0
+python3 ioc_check.py 44d88612fea8a8f36de82e1278abb02f
 ```
+
+(el último es el hash del archivo de test **EICAR**, un estándar de la industria diseñado para que cualquier antivirus lo detecte — útil para probar la herramienta sin necesidad de malware real).
 
 ## Salida
 
 ```
-VirusTotal: Esto es malicioso
+VirusTotal: MALICIOSO (64/74 engines)
 AlienVault OTX: 50 reporte(s) de la comunidad
 ```
+
+El número de motores ("engines") varía según el IOC: VirusTotal agrega y quita partners con el tiempo, y no todos los motores analizan todos los tipos de indicador (los de reputación de IP/dominio no son los mismos que los de análisis de archivos).
 
 Cada consulta también queda registrada en `resultados.json` con fecha, IOC, tipo detectado y ambos veredictos.
 
@@ -66,6 +70,5 @@ Cada consulta también queda registrada en `resultados.json` con fecha, IOC, tip
 
 ## Próximas mejoras
 
-- Soporte para consultar URLs completas en OTX.
 - Exportar historial a CSV.
 - Aceptar múltiples IOCs desde un archivo de entrada.
