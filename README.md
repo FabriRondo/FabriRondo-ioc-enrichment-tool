@@ -72,3 +72,4 @@ Cada consulta también queda registrada en `resultados.json` con fecha, IOC, tip
 
 - Exportar historial a CSV.
 - Aceptar múltiples IOCs desde un archivo de entrada.
+- Implementaciones nuevas
